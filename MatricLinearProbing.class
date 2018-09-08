@@ -1,4 +1,4 @@
-public class Matric {
+public class MatricLinearProbing {
 	private static final int SIZE=50; 
 	private long hashTable[];
 	private static int modValue = 7;
