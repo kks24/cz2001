@@ -1,3 +1,5 @@
+// Got some problem (Cause i misunderstood the hashing method), will fix later 
+
 public class MatricLinearProbing {
 	private static final int SIZE=50; 
 	private long hashTable[];
