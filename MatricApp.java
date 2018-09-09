@@ -15,11 +15,13 @@ public class MatricApp {
 			switch (option) {
 			case 1: data.insertKey(key);
 					break;
-			case 2: data.searchKey(key);
+			case 2: int index = data.searchKey(key);
+					System.out.println("Key found at index: " + index);
 					break;
 			case 3: data.deleteKey(key);
 					break;
 			default: System.out.println("Invalid option");
+					break;
 			}
 		}
 	}
