@@ -85,7 +85,6 @@ public class LinearProbing {
 		
 		// Other functions
 		public long convertKey(String key) {
-			// accept error for invalid key?
 			char firstChar = key.charAt(0);
 			char lastChar = key.charAt(key.length()-1);
 			String resultKey = (int)firstChar + key.substring(1, 8) + (int)lastChar;
