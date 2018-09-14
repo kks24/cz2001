@@ -32,6 +32,7 @@ public class LinearProbing {
 		// Add key
 		public void addKey(String key) {
 			int index = hashing(key);
+			System.out.println("Need to insert at pos:" + index);
 			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
 				if (hashTable[index] == null || hashTable[index] == "Deleted") {
 					hashTable[index] = key;
@@ -42,8 +43,9 @@ public class LinearProbing {
 					System.out.println("Key already exists.");
 					return;
 				}
-				else {
+				else { //Sample data to use this 1)U1720777D and 2)U1720777K
 					index = rehashing(index);
+					System.out.println("Need to insert at next pos:" + index);
 				}
 			}
 			System.out.println("Hash table is full.");
@@ -88,6 +90,7 @@ public class LinearProbing {
 			char firstChar = key.charAt(0);
 			char lastChar = key.charAt(key.length()-1);
 			String resultKey = (int)firstChar + key.substring(1, 8) + (int)lastChar;
+			System.out.println((int)firstChar + " " + key.substring(1, 8) + " " + (int)lastChar);
 			long longKey = Long.parseLong(resultKey);
 			return longKey;
 		}
