@@ -7,13 +7,15 @@ public class MatricApp {
 		LinearProbing data = new LinearProbing();
 		
 		while (true) {
-			data.printHashTable();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Insert option : \n"
+			System.out.println("##############################\n"
+					+ "Insert option : \n"
 					+ "1. Insert Matric Number (Eg. UXXXXXXXA)\n"
 					+ "2. Search Matric Number (Eg. UXXXXXXXA)\n"
 					+ "3. Delete Matric Number (Eg. UXXXXXXXA)\n"
-					+ "4. View Hashtable"); 
+					+ "4. View Hashtable\n"
+					+ "5. Get Average key comparisons\n"
+					+ "##############################"); 
 				int option = sc.nextInt();
 				String key = null;
 				switch (option) {
@@ -57,6 +59,12 @@ public class MatricApp {
 				case 4: 
 						data.printHashTable();
 						break;
+				case 5:
+						float AverageKeyComparison = (float)data.getKeyComparison()/(float)data.getSearch();
+						System.out.println("Number of Searches: " + data.getSearch() +
+											"\nNumber of Key Comparisons: " + data.getKeyComparison() +
+											"\nAverage Key Comparison: " + AverageKeyComparison);
+						break;
 				default: System.out.println("Invalid option");
 						break;
 				}
@@ -65,6 +73,3 @@ public class MatricApp {
 		}
 		
 		
-		
-	}
-
