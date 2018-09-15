@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Objects;
 
 public class LinearProbing {
 	// Variables & Constants
@@ -34,16 +34,16 @@ public class LinearProbing {
 			int index = hashing(key);
 			System.out.println("Need to insert at pos:" + index);
 			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
-				if (hashTable[index] == null || hashTable[index] == "Deleted") {
+				if (Objects.equals(hashTable[index], null) == true || Objects.equals(hashTable[index],"Deleted") == true) {
 					hashTable[index] = key;
 					System.out.println("Key added.");
 					return;
 				}
-				else if (hashTable[index].equals(key)) {
-					System.out.println("Key already exists.");
+				else if (Objects.equals(hashTable[index],key) == true) {
+					System.out.println("Key already added.");
 					return;
 				}
-				else { //Sample data to use this 1)U1720777D and 2)U1720777K
+				else {  //Sample data to use this 1)U1720777D and 2)U1720777K
 					index = rehashing(index);
 					System.out.println("Need to insert at next pos:" + index);
 				}
@@ -53,12 +53,25 @@ public class LinearProbing {
 		
 		// Search key
 		public int searchKey(String key) {
-			// to account for searching the whole table
+			numOfSearch ++;
 			int index = hashing(key);
-			while(hashTable[index] != null) {
-				if(hashTable[index].equals(key))
+			// check until all positions are checked
+			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
+				System.out.println("Checking pos " + index);
+				// if match is found
+				if (Objects.equals(hashTable[index],key) == true) {
+					numOfKeyComparison ++;
 					return index;
-				index = (index + 1) % SIZE;
+				}
+				else if (Objects.equals(hashTable[index],null) == true) {
+					// Checking if link list is NULL is not counted as a key comparison
+					return -1;
+				}
+				// If different matric or "deleted"
+				else {
+					numOfKeyComparison ++;
+					index = rehashing(index);
+				}
 			}
 			return -1;
 		}
@@ -66,23 +79,21 @@ public class LinearProbing {
 		// Delete key
 		public void deleteKey(String key) {
 			int index = hashing(key);
-			int numOfSearch = 0;
-			while (!key.equals(hashTable[index])) {
-				index = rehashing(index);
-				numOfSearch ++;
-				if (numOfSearch < SIZE)
-					break;
+			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
+				if (Objects.equals(hashTable[index],key) == true) {
+					hashTable[index] = "Deleted";
+					System.out.println("Item removed");
+					return;
+				}
+				else if (Objects.equals(hashTable[index],"Deleted") == true) {
+					index = rehashing(index);
+				}
+				else {
+					System.out.println("Item not found.");
+					return;
+				}
 			}
-			
-			if (key.equals(hashTable[index])) {
-				hashTable[index] = "Deleted";
-				System.out.println("Item removed.");
-				return;
-			}
-			else {
-				System.out.println("Nothing to delete.");
-			}
-
+				System.out.println("Item not found.");
 		}
 		
 		// Other functions
@@ -90,7 +101,6 @@ public class LinearProbing {
 			char firstChar = key.charAt(0);
 			char lastChar = key.charAt(key.length()-1);
 			String resultKey = (int)firstChar + key.substring(1, 8) + (int)lastChar;
-			System.out.println((int)firstChar + " " + key.substring(1, 8) + " " + (int)lastChar);
 			long longKey = Long.parseLong(resultKey);
 			return longKey;
 		}
@@ -101,5 +111,16 @@ public class LinearProbing {
 			for (int counter=0; counter < SIZE; counter ++) {
 				System.out.println(counter + " " + hashTable[counter]);
 			}
+		}
+		
+		// To track key comparisons
+		private static int numOfSearch = 0;
+		private static int numOfKeyComparison = 0;
+
+		public int getSearch() {
+			return numOfSearch;
+		}
+		public int getKeyComparison() {
+			return numOfKeyComparison;
 		}
 }
