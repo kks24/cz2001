@@ -19,8 +19,8 @@ public class LinearProbing {
 		}
 		
 		// Hashing functions
-		public int hashing(String key) {
-			long longKey = convertKey(key);
+		public int hashing(String MatricID) {
+			long longKey = convertKey(MatricID);
 			int result = (int)(longKey % SIZE);
 			return result;
 		}
@@ -30,16 +30,16 @@ public class LinearProbing {
 		}
 		
 		// Add key
-		public void addKey(String key) {
-			int index = hashing(key);
+		public void addKey(String MatricID) {
+			int index = hashing(MatricID);
 			System.out.println("Storing at index: " + index);
 			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
 				if (Objects.equals(hashTable[index], null) == true || Objects.equals(hashTable[index],"Deleted") == true) {
-					hashTable[index] = key;
+					hashTable[index] = MatricID;
 					System.out.println("Key added.");
 					return;
 				}
-				else if (Objects.equals(hashTable[index],key) == true) {
+				else if (Objects.equals(hashTable[index],MatricID) == true) {
 					System.out.println("Key already added.");
 					return;
 				}
@@ -52,14 +52,14 @@ public class LinearProbing {
 		}
 		
 		// Search key
-		public int searchKey(String key) {
+		public int searchKey(String MatricID) {
 			numOfSearch ++;
-			int index = hashing(key);
+			int index = hashing(MatricID);
 			// check until all positions are checked
 			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
 				System.out.println("Checking pos " + index);
 				// if match is found
-				if (Objects.equals(hashTable[index],key) == true) {
+				if (Objects.equals(hashTable[index],MatricID) == true) {
 					numOfKeyComparison ++;
 					return index;
 				}
@@ -77,10 +77,10 @@ public class LinearProbing {
 		}
 		
 		// Delete key
-		public void deleteKey(String key) {
-			int index = hashing(key);
+		public void deleteKey(String MatricID) {
+			int index = hashing(MatricID);
 			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
-				if (Objects.equals(hashTable[index],key) == true) {
+				if (Objects.equals(hashTable[index],MatricID) == true) {
 					hashTable[index] = "Deleted";
 					System.out.println("Item removed");
 					return;
@@ -97,10 +97,10 @@ public class LinearProbing {
 		}
 		
 		// Other functions
-		public long convertKey(String key) {
-			char firstChar = key.charAt(0);
-			char lastChar = key.charAt(key.length()-1);
-			String resultKey = (int)firstChar + key.substring(1, 8) + (int)lastChar;
+		public long convertKey(String MatricID) {
+			char firstChar = MatricID.charAt(0);
+			char lastChar = MatricID.charAt(MatricID.length()-1);
+			String resultKey = (int)firstChar + MatricID.substring(1, 8) + (int)lastChar;
 			long longKey = Long.parseLong(resultKey);
 			return longKey;
 		}
