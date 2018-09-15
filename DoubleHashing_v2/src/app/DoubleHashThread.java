@@ -7,8 +7,6 @@ public class DoubleHashThread extends Thread
 	public String[] hashTable= new String[DoubleHash.TABLE_SIZE];
 	public String id;
 	
-	public Object lock = this;
-	public boolean pause = false;
 	
 	public DoubleHashThread(String s) 
 	{
@@ -21,7 +19,6 @@ public class DoubleHashThread extends Thread
 	@Override
 	public void run()
 	{
-		int a = 0;
 		long cpuTime = 0;
 		
 		DoubleHash.searchTable(hashTable, id);
@@ -30,8 +27,9 @@ public class DoubleHashThread extends Thread
 		while (cpuTime == 0)
 			cpuTime = DoubleHash.getCpuTime(this);
 		
-		System.out.println("CPU time taken (microseconds): " + cpuTime/100000);
-		
+		System.out.println("CPU time taken " + cpuTime/100000+" ms");
+		DoubleHash.totalCpuTime += cpuTime;
+		//DoubleHash.numberOfSearch=DoubleHash.numberOfSearch+1;
 		return;
 	}
 }
