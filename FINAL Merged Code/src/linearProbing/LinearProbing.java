@@ -7,7 +7,7 @@ import app.LinearProbingThread;
 public class LinearProbing {
 	// Variables & Constants
 		private static final int SIZE = 97;
-		private static final int mod = 11;
+		private static final int mod = 97;
 		private static String[] hashTable;
 		
 		// Constructor 
@@ -124,7 +124,41 @@ public class LinearProbing {
 			return numOfKeyComparison;
 		}
 		
+		// Get Num generator
+		public void NumGenerator(double LoadFactor) {
+			long DigitPart = 0;
+			
+			for(int i = 0; i<LoadFactor*SIZE;i++) {
+				do
+				{																// ensure is 7 digits
+					DigitPart = (long)(Math.random()*10000000);
+				}while(DigitPart < 1000000);									// Num part of string
+				
+				char CharPart = (char)(Math.random()*26 + 65);					// char part of string
+				String Final = 'U' + Long.toString(DigitPart) + CharPart;
 		
+				// Adding element
+				int index = hashing(Final);
+				System.out.println("Storing at index: " + index);
+				for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
+					if (Objects.equals(hashTable[index], null) == true || Objects.equals(hashTable[index],"Deleted") == true) {
+						hashTable[index] = Final;
+						System.out.println("Key added.");
+						break;
+					}
+					else if (Objects.equals(hashTable[index],Final) == true) {
+						System.out.println("Key already added.");
+						break;
+					}
+					else {  //Sample data to use this 1)U8083214O and 2)U8235905D
+						index = rehashing(index);
+						System.out.println("Index Occupied, storing at next index: " + index);
+					}
+				}
+				if (numOfSearch == SIZE)
+					System.out.println("Hash table is full.");
+			}
+		}
 		//================================= CPU TIME ==========================
 		public static long getCpuTime(LinearProbingThread lt)
 		{
