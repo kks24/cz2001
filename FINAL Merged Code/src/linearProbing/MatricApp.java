@@ -5,12 +5,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import app.DoubleHashThread;
+import app.LinearProbingThread;
 
 public class MatricApp {
-	public static void main(String args[]) {
+	public static void LinearProbingApp() {
 		
 		LinearProbing data = new LinearProbing();
 		long totalCpuTime=0;
+		
+		//===============CPU TIME CHANGES STARTS HERE
+		List <LinearProbingThread> threadList = new ArrayList<LinearProbingThread>();
+		//===============CPU TIME CHANGES ENDS HERE (MORE BELOW)
+		
 		while (true) {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("==========================MENU==========================");
@@ -37,14 +43,38 @@ public class MatricApp {
 						}
 						break;
 				case 1: 
-						try {
+					try {
 							System.out.println("Please Enter the Student ID ");
 							key = sc.next();
 							int index = data.searchKey(key);
-							if (index == -1)
-								System.out.println("No Key Found");
-							else
-								System.out.println("Key found at index: " + index);
+							
+							//===============CPU TIME CHANGES STARTS HERE
+							threadList.add(0, new LinearProbingThread("Linear Probing Thread"));
+							threadList.get(0).setDaemon(true);
+							
+							threadList.get(0).id = key; //UPDATE WANTED STUDENT ID
+							
+							threadList.get(0).start(); //START THREAD EXECUTION
+						
+							//TERMINATE THREAD AND REMOVE FROM LIST OF ACTIVE THREADS
+							try 
+							{
+								threadList.get(0).join();
+								threadList.remove(0);
+	
+								
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							
+							//HAVE TO COMMENT THESE AS THE THREAD WILL BE THE ONE TO EXECUTE THE SEARCH
+							
+	//						if (index == -1)
+	//							System.out.println("No Key Found");
+	//						else
+	//							System.out.println("Key found at index: " + index);
+							
+							//===============CPU TIME CHANGES ENDS HERE
 						}
 						catch (StringIndexOutOfBoundsException e) {
 							System.out.println("Invaild Input! Please Try Again!.");

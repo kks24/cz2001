@@ -26,7 +26,7 @@ public class MainApp {
 			switch (menu)
 			{
 			case 1: //CALL METHOD FOR LINEAR PROBING
-				//MatricApp.LinearProbingApp();
+				MatricApp.LinearProbingApp();
 				break;
 			
 			case 2: 

@@ -1,11 +1,14 @@
 package linearProbing;
+import java.lang.management.*;
 import java.util.Objects;
+
+import app.LinearProbingThread;
 
 public class LinearProbing {
 	// Variables & Constants
 		private static final int SIZE = 97;
 		private static final int mod = 11;
-		private String[] hashTable;
+		private static String[] hashTable;
 		
 		// Constructor 
 		public LinearProbing() {
@@ -21,13 +24,13 @@ public class LinearProbing {
 		}
 		
 		// Hashing functions
-		public int hashing(String MatricID) {
+		public static int hashing(String MatricID) {
 			long longKey = convertKey(MatricID);
 			int result = (int)(longKey % mod);
 			return result;
 		}
 		
-		public int rehashing(int j) {
+		public static int rehashing(int j) {
 			return ((j + 1) % mod);
 		}
 		
@@ -54,7 +57,7 @@ public class LinearProbing {
 		}
 		
 		// Search key
-		public int searchKey(String MatricID) {
+		public static int searchKey(String MatricID) {
 			numOfSearch ++;
 			int index = hashing(MatricID);
 			// check until all positions are checked
@@ -94,7 +97,7 @@ public class LinearProbing {
 		}
 		
 		// Other functions
-		public long convertKey(String MatricID) {
+		public static long convertKey(String MatricID) {
 			char firstChar = MatricID.charAt(0);
 			char lastChar = MatricID.charAt(MatricID.length()-1);
 			String resultKey = (int)firstChar + MatricID.substring(1, 8) + (int)lastChar;
@@ -120,4 +123,21 @@ public class LinearProbing {
 		public int getKeyComparison() {
 			return numOfKeyComparison;
 		}
+		
+		
+		//================================= CPU TIME ==========================
+		public static long getCpuTime(LinearProbingThread lt)
+		{
+			ThreadMXBean bean = ManagementFactory.getThreadMXBean(); //GET THREAD BEAN
+			long cpuTime = -1000;
+							
+			if (bean.isThreadCpuTimeSupported())
+			{
+				cpuTime = bean.getThreadCpuTime(lt.getId());
+			}
+					
+			return cpuTime;
+					
+		}
+		
 }
