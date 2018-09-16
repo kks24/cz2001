@@ -77,7 +77,6 @@ public class LinearProbing {
 			return -1;
 		}
 		
-		// Delete key
 		public void deleteKey(String MatricID) {
 			int index = hashing(MatricID);
 			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
@@ -86,12 +85,8 @@ public class LinearProbing {
 					System.out.println("Item removed");
 					return;
 				}
-				else if (Objects.equals(hashTable[index],"Deleted") == true) {
-					index = rehashing(index);
-				}
 				else {
-					System.out.println("Item not found.");
-					return;
+					index = rehashing(index);
 				}
 			}
 				System.out.println("Item not found.");
