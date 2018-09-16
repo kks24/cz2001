@@ -127,7 +127,8 @@ public class LinearProbing {
 		// Get Num generator
 		public void NumGenerator(double LoadFactor) {
 			long DigitPart = 0;
-			
+			for (int counter = 0; counter < SIZE; counter ++)
+				hashTable[counter] = null;
 			for(int i = 0; i<LoadFactor*SIZE;i++) {
 				do
 				{																// ensure is 7 digits
