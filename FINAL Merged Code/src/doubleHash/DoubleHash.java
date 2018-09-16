@@ -8,7 +8,7 @@ import app.DoubleHashThread;
 public class DoubleHash 
 {
 	public static final int TABLE_SIZE =97;
-	private static final int mod1 = 11;   //hash1 
+	private static final int mod1 = TABLE_SIZE;   //hash1 
 	private static final int mod2 = 5;	  //hash2 	
 	public static long totalCpuTime = 0;
 	public static int numberOfSearch =0;
@@ -101,21 +101,31 @@ public class DoubleHash
 					
 					if(addIntoTable(hashTable,key1,data)==false) 
 					{
+						System.out.println(cData+" is unable to hash");
 						System.out.println("Hash Collision occur, Second Hashing is needed");
-						
+						int countInsert=0;
 						int a =0;
 						while(true) 
 						{
+							if(countInsert==TABLE_SIZE)
+							{
+								System.out.println("Failed to insert Hashtable, all possible slots have been hit");
+								break;
+							}
 							key2=hash2(cData,a);
 							if(addIntoTable(hashTable,key2,data)==false) 
 							{
+								System.out.println(cData+" is unable to hash");
 								System.out.println("Unable to Second Hash in + "+key2);
 							}
+							
 							else
 							{
 								System.out.println("Successful Second Hash in "+key2);
 								break;
 							}
+							a++;
+							countInsert++;
 						}
 					}
 					
@@ -309,22 +319,52 @@ public class DoubleHash
 	}
 	
 	public static int hash2(long matri,int i) {
-		return (hash1(matri)+ i*(int)matri%mod2)%TABLE_SIZE;  // this one i think need to change , he told me to change this 
+		return (hash1(matri)+ i*(mod2 - (int)matri%mod2))%TABLE_SIZE;  // this one i think need to change , he told me to change this 
 	}															//  here is all new function from DDD
 	
 	public static void NumGenerator(String[] HashTable, double LoadFactor) {
 		long DigitPart = 0;
+		
 		for(int i = 0; i<LoadFactor*TABLE_SIZE;i++) {
-			do{																// ensure is 7 digits
+			do
+			{																// ensure is 7 digits
 				DigitPart = (long)(Math.random()*10000000);
 			}while(DigitPart < 1000000);									// Num part of string
+			
 			char CharPart = (char)(Math.random()*26 + 65);					// char part of string
 			String Final = 'U' + Long.toString(DigitPart) + CharPart;
-			while (true){													// Ensure that String generated are not placed in the same slot more than once
-				int index = (int)(Math.random()*TABLE_SIZE);
-				if(HashTable[index] == null) {
-					HashTable[index] = Final;								// if slot is empty then u insert in
-					break;
+	
+			Long cData = StringtoInt(Final); // new convert int to long 
+			int key1=hash1(cData);
+			
+			if(addIntoTable(HashTable,key1,Final)==false) 
+			{
+				System.out.println(Final+" is unable to hash");
+				System.out.println("Hash Collision occur, Second Hashing is needed");
+				int count=0;
+				int a =0;
+				int key2=0;
+				while(true) 
+				{
+					if(count==TABLE_SIZE)
+					{
+						System.out.println("Failed to insert Hashtable, all possible slots have been hit");
+						break;
+					}
+					key2=hash2(cData,a);
+					if(addIntoTable(HashTable,key2,Final)==false) 
+					{
+						System.out.println(Final+" is unable to hash");
+						System.out.println("Unable to Second Hash in + "+key2);
+					}
+					
+					else
+					{
+						System.out.println("Successful Second Hash in "+key2);
+						break;
+					}
+					a++;
+					count++;
 				}
 			}
 		}
