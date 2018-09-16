@@ -10,6 +10,7 @@ public class ddd {
 		for(int j=0;j<Array_size;j++) {					//ensure all slot is not null
 			HashTable[j] = empty;
 		}
+		NumGenerator(HashTable,0.5);					// if load factor is 0.5
 		
 		System.out.println("Matriculation Number: ");
 		String matri = sc.nextLine();
