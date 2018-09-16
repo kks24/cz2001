@@ -170,6 +170,7 @@ public class DoubleHash
 					System.out.println("Enter the Load Factor");
 					double LoadFactor=sc.nextDouble();
 					NumGenerator(hashTable,LoadFactor);
+					break;
 				case 0:
 					break;
 					
