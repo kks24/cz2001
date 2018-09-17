@@ -336,8 +336,9 @@ public class DoubleHash
 	
 	public static void NumGenerator(String[] HashTable, double LoadFactor) {
 		long DigitPart = 0;
-		
-		for(int i = 0; i<LoadFactor*TABLE_SIZE;i++) {
+		for (int i = 0; i < TABLE_SIZE; i++)
+			HashTable[i] = null;	
+		for(i = 0; i<LoadFactor*TABLE_SIZE;i++) {
 			do
 			{																// ensure is 7 digits
 				DigitPart = (long)(Math.random()*10000000);
