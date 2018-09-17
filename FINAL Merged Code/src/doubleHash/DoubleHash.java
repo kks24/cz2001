@@ -7,7 +7,7 @@ import app.DoubleHashThread;
 
 public class DoubleHash 
 {
-	public static final int TABLE_SIZE =97;
+	public static final int TABLE_SIZE =11927;
 	private static final int mod1 = TABLE_SIZE;   //hash1 
 	private static final int mod2 = 5;	  //hash2 	
 	public static long totalCpuTime = 0;
@@ -88,7 +88,7 @@ public class DoubleHash
 					}
 					
 					long elapsedTime = System.nanoTime()-startTime;
-					System.out.println("NANO TIME (microseconds): " + elapsedTime/100000);
+					System.out.println("CPU time (microseconds): " + elapsedTime/100000);
 					totalCpuTime += elapsedTime;
 					break;
 					
@@ -336,8 +336,7 @@ public class DoubleHash
 	
 	public static void NumGenerator(String[] HashTable, double LoadFactor) {
 		long DigitPart = 0;
-		for (int i = 0; i < TABLE_SIZE; i++)
-			HashTable[i] = null;	
+		
 		for(int i = 0; i<LoadFactor*TABLE_SIZE;i++) {
 			do
 			{																// ensure is 7 digits

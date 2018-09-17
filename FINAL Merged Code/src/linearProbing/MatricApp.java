@@ -50,13 +50,12 @@ public class MatricApp {
 					try {
 						System.out.println("Please Enter the Student ID ");
 						key = sc.next();
-						int index = data.searchKey(key);
-
-						//===============CPU TIME CHANGES STARTS HERE
+						//int index = data.searchKey(key);
 						threadList.add(0, new LinearProbingThread("Linear Probing Thread"));
 						threadList.get(0).setDaemon(true);
-
-						threadList.get(0).id = key; //UPDATE WANTED STUDENT ID
+						
+						threadList.get(0).id =key;
+						
 						long startTime = System.nanoTime();
 						threadList.get(0).start(); //START THREAD EXECUTION
 
@@ -73,7 +72,7 @@ public class MatricApp {
 						
 						
 						long elapsedTime = System.nanoTime() - startTime;
-						System.out.println("NANO TIME (microseconds): " + elapsedTime/100000);
+						System.out.println("CPU Time (microseconds): " + elapsedTime/100000);
 						totalCpuTime+=elapsedTime;
 
 						//===============CPU TIME CHANGES ENDS HERE

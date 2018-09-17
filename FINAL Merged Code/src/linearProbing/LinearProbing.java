@@ -6,8 +6,8 @@ import app.LinearProbingThread;
 
 public class LinearProbing {
 	// Variables & Constants
-		private static final int SIZE = 97;
-		private static final int mod = 97;
+		private static final int SIZE = 11927;
+		private static final int mod = 11927;
 		private static String[] hashTable;
 		
 		// Constructor 
@@ -165,7 +165,7 @@ public class LinearProbing {
 					}
 					else {  //Sample data to use this 1)U8083214O and 2)U8235905D
 						index = rehashing(index);
-						System.out.println("Index Occupied, storing at next index: " + index);
+						System.out.println("Index Occupied for " + Final + ", storing at next index: " + index);
 					}
 				}
 				if (numOfSearch == SIZE)

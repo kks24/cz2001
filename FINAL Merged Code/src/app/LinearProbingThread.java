@@ -23,10 +23,10 @@ public class LinearProbingThread extends Thread
 			System.out.println("Key found at index: " + index);
 		
 		
-		while (cpuTime == 0)
-			cpuTime = LinearProbing.getCpuTime(this);
-		
-		System.out.println("CPU time taken (microseconds): " + cpuTime/100000);
+//		while (cpuTime == 0)
+//			cpuTime = LinearProbing.getCpuTime(this);
+//		
+//		System.out.println("CPU time taken (microseconds): " + cpuTime/100000);
 		
 		return;
 	}
