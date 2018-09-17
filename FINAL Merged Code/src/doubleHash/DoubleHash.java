@@ -176,6 +176,9 @@ public class DoubleHash
 					System.out.println("Enter the Load Factor");
 					double LoadFactor=sc.nextDouble();
 					NumGenerator(hashTable,LoadFactor);
+					totalCpuTime = 0;
+					numberOfSearch = 0;
+					System.out.println("Total CPU time and number of searches have been reset.");
 					break;
 				case 8:
 					totalCpuTime = 0;
@@ -335,6 +338,10 @@ public class DoubleHash
 	}															//  here is all new function from DDD
 	
 	public static void NumGenerator(String[] HashTable, double LoadFactor) {
+		
+		for (int i = 0; i < TABLE_SIZE; i++)
+			HashTable[i]=null;
+		
 		long DigitPart = 0;
 		
 		for(int i = 0; i<LoadFactor*TABLE_SIZE;i++) {

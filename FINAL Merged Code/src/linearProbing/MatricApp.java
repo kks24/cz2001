@@ -122,6 +122,10 @@ public class MatricApp {
 					System.out.println("Enter the Load Factor");
 					double LoadFactor=sc.nextDouble();
 					data.NumGenerator(LoadFactor);
+					
+					totalCpuTime = 0;
+					numberOfSearch = 0;
+					System.out.println("Total CPU time and number of searches have been reset.");
 					break; 
 				case 8:
 					totalCpuTime = 0;
