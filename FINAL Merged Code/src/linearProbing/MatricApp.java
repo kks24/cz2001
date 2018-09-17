@@ -125,7 +125,7 @@ public class MatricApp {
 					break; 
 				case 8:
 					totalCpuTime = 0;
-					data.resetSearch();
+					numberOfSearch = 0;
 					System.out.println("Total CPU time and number of searches have been reset.");	
 				case 0: 
 					break;
