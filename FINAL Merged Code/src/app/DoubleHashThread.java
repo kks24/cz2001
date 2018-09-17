@@ -28,7 +28,7 @@ public class DoubleHashThread extends Thread
 			cpuTime = DoubleHash.getCpuTime(this);
 		
 		System.out.println("CPU time taken " + cpuTime/100000+" ms");
-		DoubleHash.totalCpuTime += cpuTime;
+		//DoubleHash.totalCpuTime += cpuTime;
 		//DoubleHash.numberOfSearch=DoubleHash.numberOfSearch+1;
 		return;
 	}

@@ -15,10 +15,11 @@ public class MainApp {
 		do 
 		{
 			//MENU
-			System.out.println("============== MAIN MENU ============");
-			System.out.println("1. Linear Probing");
-			System.out.println("2. Double Hashing");
-			System.out.println("0. Exit");
+			System.out.println("========================== MAIN MENU ==========================");
+			System.out.println("Option 1: Linear Probing");
+			System.out.println("Option 2: Double Hashing");
+			System.out.println("Option 0: Exit");
+			System.out.print("Choice: ");
 			Scanner sc = new Scanner (System.in);
 			menu = sc.nextInt();
 			

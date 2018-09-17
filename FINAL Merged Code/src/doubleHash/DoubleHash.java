@@ -50,6 +50,7 @@ public class DoubleHash
 			System.out.println("Option 5: Display Average CPU time");
 			System.out.println("Option 6: Display Average Key Comparsion");
 			System.out.println("Option 7: Demo Load Factor");
+			System.out.println("Option 8: Reset Average CPU time and Key Comparisons");
 			System.out.println("Option 0: Back to main menu");
 			System.out.print("Choice: ");
 			choice=sc.nextInt();
@@ -71,6 +72,8 @@ public class DoubleHash
 					data=sc.nextLine();
 					threadList.get(0).id = data; //UPDATE WANTED STUDENT ID
 					
+					long startTime = System.nanoTime();
+					
 					threadList.get(0).start(); //START THREAD EXECUTION
 				
 					//TERMINATE THREAD AND REMOVE FROM LIST OF ACTIVE THREADS
@@ -84,6 +87,9 @@ public class DoubleHash
 						e.printStackTrace();
 					}
 					
+					long elapsedTime = System.nanoTime()-startTime;
+					System.out.println("NANO TIME (microseconds): " + elapsedTime/100000);
+					totalCpuTime += elapsedTime;
 					break;
 					
 				case 2:
@@ -170,6 +176,11 @@ public class DoubleHash
 					System.out.println("Enter the Load Factor");
 					double LoadFactor=sc.nextDouble();
 					NumGenerator(hashTable,LoadFactor);
+					break;
+				case 8:
+					totalCpuTime = 0;
+					numberOfSearch = 0;
+					System.out.println("Total CPU time and number of searches have been reset.");
 					break;
 				case 0:
 					break;

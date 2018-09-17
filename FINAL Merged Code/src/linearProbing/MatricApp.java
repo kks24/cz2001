@@ -8,18 +8,20 @@ import app.DoubleHashThread;
 import app.LinearProbingThread;
 
 public class MatricApp {
+	
+	public static int numberOfSearch = 0;
+	
 	public static void LinearProbingApp() {
 		
 		LinearProbing data = new LinearProbing();
 		long totalCpuTime=0;
-		
 		//===============CPU TIME CHANGES STARTS HERE
 		List <LinearProbingThread> threadList = new ArrayList<LinearProbingThread>();
 		//===============CPU TIME CHANGES ENDS HERE (MORE BELOW)
 		
 		while (true) {
 			Scanner sc = new Scanner(System.in);
-			System.out.println("==========================MENU==========================");
+			System.out.println("========================== LINEAR PROBING MENU ==========================");
 			System.out.println("Option 1: Search");
 			System.out.println("Option 2: Add");
 			System.out.println("Option 3: Delete");
@@ -27,6 +29,7 @@ public class MatricApp {
 			System.out.println("Option 5: Display Average CPU time");
 			System.out.println("Option 6: Display Average Key Comparsion");
 			System.out.println("Option 7: Demo Load Factor");
+			System.out.println("Option 8: Reset Average CPU time and Key Comparisons");
 			System.out.println("Option 0: Back to main menu"); 
 			System.out.print("Choice: ");
 				int option = sc.nextInt();
@@ -54,7 +57,7 @@ public class MatricApp {
 						threadList.get(0).setDaemon(true);
 
 						threadList.get(0).id = key; //UPDATE WANTED STUDENT ID
-
+						long startTime = System.nanoTime();
 						threadList.get(0).start(); //START THREAD EXECUTION
 
 						//TERMINATE THREAD AND REMOVE FROM LIST OF ACTIVE THREADS
@@ -67,13 +70,11 @@ public class MatricApp {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-
-						//HAVE TO COMMENT THESE AS THE THREAD WILL BE THE ONE TO EXECUTE THE SEARCH
-
-//						if (index == -1)
-//							System.out.println("No Key Found");
-//						else
-//							System.out.println("Key found at index: " + index);
+						
+						
+						long elapsedTime = System.nanoTime() - startTime;
+						System.out.println("NANO TIME (microseconds): " + elapsedTime/100000);
+						totalCpuTime+=elapsedTime;
 
 						//===============CPU TIME CHANGES ENDS HERE
 					}
@@ -97,14 +98,15 @@ public class MatricApp {
 					data.printHashTable();
 					break;
 				case 5:
-					if(data.getSearch() == 0) {
+					
+					if(numberOfSearch == 0) {
 						System.out.println("Please Search for at least 1");
 						break;
 					}
 					System.out.println("======Printing Average CPU time======");
-					System.out.println("Total number of Search: "+data.getSearch());
+					System.out.println("Total number of Search: "+numberOfSearch);
 					System.out.println("Total CPU time: "+ totalCpuTime/100000+" ms");
-					System.out.println("Average CPU time = "+(totalCpuTime/(data.getSearch()*100000))+" ms");
+					System.out.println("Average CPU time = "+(totalCpuTime/(numberOfSearch*100000))+" ms");
 
 					break;
 				case 6:
@@ -122,11 +124,16 @@ public class MatricApp {
 					double LoadFactor=sc.nextDouble();
 					data.NumGenerator(LoadFactor);
 					break; 
+				case 8:
+					totalCpuTime = 0;
+					data.resetSearch();
+					System.out.println("Total CPU time and number of searches have been reset.");	
 				case 0: 
 					break;
 				default: System.out.println("Invalid option");
 						break;
 				}
+				if (option == 0) break;
 			}
 			
 		}

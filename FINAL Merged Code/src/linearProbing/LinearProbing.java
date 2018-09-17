@@ -57,18 +57,25 @@ public class LinearProbing {
 		}
 		
 		// Search key
-		public static int searchKey(String MatricID) {
+		public static int searchKey(String MatricID) 
+		{
 			numOfSearch ++;
+			
+			MatricApp.numberOfSearch++;
+			
 			int index = hashing(MatricID);
 			// check until all positions are checked
-			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) {
+			for (int numOfSearch = 0; numOfSearch < SIZE; numOfSearch ++) 
+			{
 				System.out.println("Checking pos " + index);
 				// if match is found
-				if (Objects.equals(hashTable[index],MatricID) == true) {
+				if (Objects.equals(hashTable[index],MatricID) == true) 
+				{
 					numOfKeyComparison ++;
 					return index;
 				}
-				else if (Objects.equals(hashTable[index],null) == true) {
+				else if (Objects.equals(hashTable[index],null) == true) 
+				{
 					// Checking if link list is NULL is not counted as a key comparison
 					return -1;
 				}
@@ -119,6 +126,11 @@ public class LinearProbing {
 
 		public int getSearch() {
 			return numOfSearch;
+		}
+		
+		public void resetSearch()
+		{
+			numOfSearch = 0;
 		}
 		public int getKeyComparison() {
 			return numOfKeyComparison;
