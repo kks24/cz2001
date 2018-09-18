@@ -15,6 +15,7 @@ public class MatricApp {
 		
 		LinearProbing data = new LinearProbing();
 		long totalCpuTime=0;
+		double LoadFactor = 0;
 		//===============CPU TIME CHANGES STARTS HERE
 		List <LinearProbingThread> threadList = new ArrayList<LinearProbingThread>();
 		//===============CPU TIME CHANGES ENDS HERE (MORE BELOW)
@@ -103,6 +104,7 @@ public class MatricApp {
 						break;
 					}
 					System.out.println("======Printing Average CPU time======");
+					System.out.println("Load factor: " + LoadFactor);
 					System.out.println("Total number of Search: "+numberOfSearch);
 					System.out.println("Total CPU time: "+ totalCpuTime/100000+" ms");
 					System.out.println("Average CPU time = "+(totalCpuTime/(numberOfSearch*100000))+" ms");
@@ -114,13 +116,14 @@ public class MatricApp {
 						break;
 					}
 					float AverageKeyComparison = (float)data.getKeyComparison()/(float)data.getSearch();
+					System.out.println("Load factor: " + LoadFactor);
 					System.out.println("Number of Searches: " + data.getSearch() +
 										"\nNumber of Key Comparisons: " + data.getKeyComparison() +
 										"\nAverage Key Comparison: " + AverageKeyComparison);
 					break;
 				case 7: 
 					System.out.println("Enter the Load Factor");
-					double LoadFactor=sc.nextDouble();
+					LoadFactor=sc.nextDouble();
 					data.NumGenerator(LoadFactor);
 					
 					totalCpuTime = 0;

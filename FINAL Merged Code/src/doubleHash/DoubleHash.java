@@ -13,6 +13,7 @@ public class DoubleHash
 	public static long totalCpuTime = 0;
 	public static int numberOfSearch =0;
 	public static int totalKey=0;
+	public static double LoadFactor=0;
 	public static void DoubleHashApp()
 	{
 		String[] hashTable= new String[TABLE_SIZE];
@@ -42,7 +43,7 @@ public class DoubleHash
 		
 		do 
 		{
-			System.out.println("==========================MENU==========================");
+			System.out.println("========================== DOUBLE HASH MENU ==========================");
 			System.out.println("Option 1: Search");
 			System.out.println("Option 2: Add");
 			System.out.println("Option 3: Delete");
@@ -59,19 +60,15 @@ public class DoubleHash
 			{
 				case 1: //SEARCH
 					//CREATE A THREAD AND ADD TO LIST
-					count++;
 					threadList.add(0, new DoubleHashThread("Double Hash Thread"));
 					threadList.get(0).setDaemon(true);
 					
-					//UPDATE THREAD HASH TABLE
-					threadList.get(0).hashTable = hashTable;
-					
-					//GET USER INPUT
+					count++;
 					sc.nextLine(); //clear buffer
 					System.out.println("Please Enter the Student ID ");
 					data=sc.nextLine();
 					threadList.get(0).id = data; //UPDATE WANTED STUDENT ID
-					
+					threadList.get(0).hashTable = hashTable;
 					long startTime = System.nanoTime();
 					
 					threadList.get(0).start(); //START THREAD EXECUTION
@@ -158,6 +155,7 @@ public class DoubleHash
 						break;
 					}
 					System.out.println("======Printing Average CPU time======");
+					System.out.println("Load factor: " + LoadFactor);
 					System.out.println("Total number of Search: "+numberOfSearch);
 					System.out.println("Total CPU time: "+ totalCpuTime/100000+" ms");
 					System.out.println("Average CPU time = "+(totalCpuTime/(numberOfSearch*100000))+" ms");
@@ -169,12 +167,14 @@ public class DoubleHash
 						break;
 					}
 					System.out.println("======Printing Average Key Comparison======");
+					System.out.println("Load factor: " + LoadFactor);
 					System.out.println("Total number of Search: "+numberOfSearch);
 					System.out.println("Total number of Key Comparison: "+totalKey);
 					System.out.println("Average Key Comparison = "+(totalKey/numberOfSearch));
+					break;
 				case 7:
 					System.out.println("Enter the Load Factor");
-					double LoadFactor=sc.nextDouble();
+					LoadFactor=sc.nextDouble();
 					NumGenerator(hashTable,LoadFactor);
 					totalCpuTime = 0;
 					numberOfSearch = 0;
@@ -232,6 +232,8 @@ public class DoubleHash
 	
 	public static void searchTable(String[] hashTable,String data) 
 	{
+		numberOfSearch++;
+		
 		int currentNoOfKeyComparsion=0;
 		Long cData = StringtoInt(data);  // string to Long
 		int key1=hash1(cData);
@@ -245,13 +247,13 @@ public class DoubleHash
 				if(hashTable[key1]==null) 
 				{
 					System.out.println("The 1st key: "+key1+" in the array is null");
-					numberOfSearch++; //1st search NULL
+//					numberOfSearch++; //1st search NULL
 					break;
 				}
 				if(Objects.equals(hashTable[key1],data)==true)
 				{
 					System.out.println("The 1st key: "+key1+" in the array have the data "+data);
-					numberOfSearch++; //1st search DATA
+//					numberOfSearch++; //1st search DATA
 					totalKey++;
 					break;
 				}
@@ -262,25 +264,25 @@ public class DoubleHash
 				if(hashTable[key2]==null)
 				{
 					System.out.println("The "+(i+1)+" key in the array is null"); // [key2]== null
-					numberOfSearch=numberOfSearch++;
+//					numberOfSearch=numberOfSearch++;
 					totalKey=currentNoOfKeyComparsion+totalKey; // null = did not compare , hence currentKey will not +1
 					break;
 				}
-				if(Objects.equals(hashTable[key1],data)==true) //[key1] == data
+				/*if(Objects.equals(hashTable[key1],data)==true) //[key1] == data
 				{
 					System.out.println("The "+data+" is searched and found in index: "+key1+" (key1)");
 					currentNoOfKeyComparsion++;
-					numberOfSearch++; //1st Search GOT DATA
+//					numberOfSearch++; //1st Search GOT DATA
 					totalKey=currentNoOfKeyComparsion+totalKey; // total key +1
 					break;
-				}
+				}*/
 				if(hashTable[key2]!=null) //[key2] != null
 				{
 					if(Objects.equals(hashTable[key2],data)==true)// [key2] == data
 					{
 						System.out.println("The "+data+" is searched and found in index: "+key2+" (key2)");
 						currentNoOfKeyComparsion++; // current key +1
-						numberOfSearch++; //add to the total key comparison
+//						numberOfSearch++; //add to the total key comparison
 						totalKey=currentNoOfKeyComparsion+totalKey; // add to total key comparison
 						break;
 					}
@@ -293,7 +295,7 @@ public class DoubleHash
 			{
 				System.out.println("We have search the whole table with size of "+TABLE_SIZE);
 				System.out.println("The data "+data+" do not exist in the table");
-				numberOfSearch=numberOfSearch++;
+//				numberOfSearch=numberOfSearch++;
 				totalKey=currentNoOfKeyComparsion+totalKey;
 				break;
 			}
