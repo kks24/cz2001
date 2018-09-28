@@ -3,7 +3,7 @@ import java.util.*;
 public class MergeSort {
 	public final static int SIZE = 10;
 	private int[] array;
-	
+	public static int totalKeyCom=0;
 	public MergeSort() {
 		array = new int[SIZE];
 	}
@@ -32,7 +32,7 @@ public class MergeSort {
 	
 	public void printArray() {
 		for (int i = 0; i < SIZE; i ++) {
-			System.out.println(array[i]);
+			System.out.print(array[i]+" ");
 		}
 	}
 	
@@ -65,8 +65,10 @@ public class MergeSort {
 		int i = 0;
 		int j = 0;
 		int k = l;
-		
+		int keyCom=0;
 		while (i < n1 && j < n2 ) {
+			System.out.println("");
+			System.out.println(temp1[i]+" VS "+temp2[j]);
 			if (temp1[i] < temp2[j]) {
 				array[k] = temp1[i];
 				i++;
@@ -82,6 +84,11 @@ public class MergeSort {
 				array[k+1] = temp2[j];
 				i++;j++;k+=2;
 			}
+			keyCom++;
+			totalKeyCom=keyCom+totalKeyCom;
+			System.out.println("l ="+l+" r= "+r+" n1 = "+n1+" n2 = "+n2+" i="+i+" & j= "+j+ " comp: " + keyCom);
+			System.out.println("Total Key com = "+totalKeyCom);
+			printArray();
 		}
 		
 		// If one is empty only
