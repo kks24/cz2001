@@ -6,5 +6,7 @@ public class MergeSortApp {
 		System.out.println();
 		array.mergeMethod(0, array.SIZE-1);
 		array.printArray();
+		array.printKeyComparisons();
 	}
 }
+
