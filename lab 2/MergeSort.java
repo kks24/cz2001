@@ -37,7 +37,7 @@ public class MergeSort {
 	}
 	
 	public void mergeMethod(int first, int last) {
-		if (last-first > 1) {
+		if (first < last) {
 			int middle = (first+last)/2;
 			mergeMethod(first, middle);
 			mergeMethod(middle+1,last);
@@ -54,7 +54,7 @@ public class MergeSort {
 		int[] temp1 = new int[n1];
 		int[] temp2 = new int[n2];
 		
-		for (int i = 0; i <n1; i++) {
+		for (int i = 0; i<n1; i++) {
 			temp1[i] = array[l+i];
 		}
 		for (int j = 0; j <n2; j++) {
