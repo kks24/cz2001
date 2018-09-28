@@ -1,0 +1,20 @@
+public class OneCaseApp {
+	public static void main(String[] args) {
+		Sorting array = new Sorting();
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Input Size(Range 1k-1m): ");
+		Sorting.SIZE = sc.nextInt();
+		
+		// set whether merge or insertion
+		System.out.println("type 'true' for mergesort, 'false' for insertionsort");
+		boolean isMerge = sc.nextBoolean();
+		// set data type
+		System.out.println("Select data type: \n1. Randomise\n2. Increment\n3. Decrement");
+		int option = sc.nextInt();
+		array.resultRun(option,isMerge);
+		System.out.println("Sort: ");
+		System.out.println("SIZE = " + Sorting.SIZE + ", option = " + option);
+		array.printKeyComparisons();
+	}
+}
