@@ -1,0 +1,36 @@
+public class App {
+
+	public static void main(String[] args) {
+		// initialise sorting array
+		Sorting array = new Sorting();
+		
+		// get size range from 1000-1mil
+		int increment = 50000;
+		int[] arraySize = new int[10000];
+		int length = 0;
+		for (int i = 50000; i <= 1000000; i += increment) {
+			arraySize[length] = i;
+			length ++;
+		}
+		
+		// for each size, get values for 3 different arrays
+		for (int j = 0; j < length; j ++) {
+			Sorting.SIZE = arraySize[j];
+			// for each data option
+			for (int option = 1; option < 2; option ++) {
+				
+				// Merge Sort
+				/*array.resultRun(option,true);
+				System.out.println("MergeSort: ");
+				System.out.println("SIZE = " + Sorting.SIZE + ", option = " + option);
+				array.printKeyComparisons();
+				*/// Insertion Sort
+				array.resultRun(option, false);
+				System.out.println("InsertionSort: ");
+				System.out.println("SIZE = " + Sorting.SIZE + ", option = " + option);
+				array.printKeyComparisons();	
+			}
+		}
+	}
+
+}
