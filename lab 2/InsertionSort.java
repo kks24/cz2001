@@ -1,16 +1,35 @@
 //InsertionSort Function
 
 public class InsertionSort {
-	// Main method 
-    public static void main(String args[]) 
-    {         
-        int arr[] = {12, 15, 13, 5, 6}; //numGenerator
-        
-        InsertionSort ob = new InsertionSort();         
-        ob.sort(arr, arr.length); 
-          
-        printArray(arr); 
-    } 
+	private final static int SIZE = 1000;
+	private long numberOfComparison = 0;
+	private int[] array;
+	
+	public InsertionSort() {
+		array = new int[SIZE];
+	}
+    
+ // Data generator
+ 	public void generateData(int generateInput) {
+ 		switch (generateInput) {
+ 			case 1:
+ 				for (int i = 0; i < SIZE; i ++) {
+ 					int value = (int)(Math.random()*((SIZE-1)+1))+1;
+ 					array[i] = value;
+ 				}
+ 				break;
+ 			case 2:
+ 				for (int i =0; i < SIZE; i ++) {
+ 					array[i] = i + 1;
+ 				}
+ 				break;
+ 			case 3: 
+ 				for (int i=0; i < SIZE; i ++) {
+ 					array[i] = SIZE-i; 
+ 				}
+ 				break;
+ 		}
+ 	}
 	
 	
 	/*Sorting Array with insertion sort*/
@@ -18,6 +37,7 @@ public class InsertionSort {
     { 
         for(int i = 1; i<n; i++) {
         	for(int j=i; j>0; j--) {
+        		numberOfComparison++;
         		if(slot[j] < slot[j-1]) {
         			//Swap function
         			int temp = slot[j];
@@ -39,4 +59,45 @@ public class InsertionSort {
     		System.out.print(arr[i] + " "); 
     	System.out.println(); 
     } 
+    
+    public void printArray() {
+    	System.out.println("Unsorted List");
+    	int count = 0;
+    	for (int i = 0; i < SIZE; i ++) {
+    		count++;
+    		if(count==30) {
+    			System.out.println(array[i] + " ");
+    			count = 0;
+    		}
+    		else {
+    			System.out.print(array[i] + " ");
+    		}
+		}
+    	System.out.println("");
+		System.out.println("Sorted List");
+		sort(array, array.length);
+		count = 0;
+		for (int i = 0; i < SIZE; i ++) {
+			count++;
+    		if(count==30) {
+    			System.out.println(array[i] + " ");
+    			count = 0;
+    		}
+    		else {
+    			System.out.print(array[i] + " ");
+    		}
+		}
+		
+	}
+    
+    public long getNumberOfComparison() {
+		long count;
+		count = numberOfComparison;
+		numberOfComparison = 0;
+		return count;
+	}
+	
+	public void resetNumberOfComparison() {
+		numberOfComparison = 0;
+	}
 }
