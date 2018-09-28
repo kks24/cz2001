@@ -1,9 +1,7 @@
-package exampleClass3;
-
 import java.util.*;
 
 public class MergeSort {
-	private final static int SIZE = 100;
+	public final static int SIZE = 10;
 	private int[] array;
 	
 	public MergeSort() {
@@ -38,7 +36,7 @@ public class MergeSort {
 		}
 	}
 	
-	public void mergeMethod(int first, int last) 
+	public void mergeMethod(int first, int last) {
 		if (last-first > 1) {
 			int middle = (first+last)/2;
 			mergeMethod(first, middle);
@@ -78,8 +76,22 @@ public class MergeSort {
 				array[k] = temp2[j];
 				j ++;
 				k ++;
-				
 			}
-	}	
-	
+			else {
+				array[k] = temp1[i];
+				array[k+1] = temp2[j];
+				i++;j++;k+=2;
+			}
+		}
+		
+		// If one is empty only
+		while (i< n1) {
+			array[k] = temp1[i];
+			i++;k++;
+		}
+		while (j<n2) {
+			array[k] = temp2[j];
+			j++;k++;
+		}
+	}
 }
