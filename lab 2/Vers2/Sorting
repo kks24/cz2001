@@ -7,7 +7,7 @@ public class Sorting {
 	}
 	
 	//For key comparisons
-	private static int numOfKeyComparisons = 0;
+	private static long numOfKeyComparisons = 0;
 	public void printKeyComparisons() {
 		System.out.println("Number of Key Comparisions: " + numOfKeyComparisons);
 	}
@@ -15,8 +15,8 @@ public class Sorting {
 		numOfKeyComparisons = 0;
 	}
 	
-	//For CFPU time
-	private static float cpuTime = 0;
+	//For CPU time in nanoseconds
+	private static long cpuTime = 0;
 	public void printCPUTime() {
 		System.out.println("CPU Time: " + cpuTime);
 	}
@@ -29,34 +29,26 @@ public class Sorting {
 		resetKeyComparisons();
 		resetCPUTime();
 		generateData(option);
-		if (option == 0) {
-			// Create copy
-			int[] original = new int[SIZE];
-			for (int i = 0; i < SIZE; i ++) {
-				original[i] = array[i];
-			}
-			
-			int numOfSort = 1;
-			// Get average of 5 sorts
-			for (int j = 0; j < numOfSort; j ++) {
-				if (isMerge)
-					mergeMethod(0,(SIZE-1));
-				else 
-					insertionMethod(SIZE);
-				// replace array with original
-				for (int x = 0; x < SIZE; x ++) {
-					array[x] = original[x];
-				}
-			}
-			numOfKeyComparisons /= numOfSort;
-			cpuTime /= numOfSort;
+		// Create copy
+		int[] original = new int[SIZE];
+		for (int i = 0; i < SIZE; i ++) {
+			original[i] = array[i];
 		}
-		else {
-			if (isMerge) 
-				mergeMethod(0, (SIZE-1));
+		// To get a reliable data set
+		// switch to 1 for insertion sort option 2 or 3 as it is very slow
+		int numOfSort = 10;
+		for (int j = 0; j < numOfSort; j ++) {
+			if (isMerge)
+				mergeMethod(0,(SIZE-1));
 			else 
 				insertionMethod(SIZE);
+			// replace array with original
+			for (int x = 0; x < SIZE; x ++) {
+				array[x] = original[x];
+			}
 		}
+		numOfKeyComparisons /= numOfSort;
+		cpuTime /= numOfSort;		
 	}
 	
 	public void printArray() {
@@ -91,12 +83,14 @@ public class Sorting {
 	
 	// Merge Sort
 	public void mergeMethod(int first, int last) {
+		long startTime = System.nanoTime();
 		if (first < last) {
 			int middle = (first+last)/2;
 			mergeMethod(first, middle);
 			mergeMethod(middle+1,last);
 			merge(first,last);
 		}
+		cpuTime += System.nanoTime() - startTime;
 	}
 	
 	public void merge(int l, int r) {
@@ -152,20 +146,20 @@ public class Sorting {
 	
 	
 	// Insertion Sort
-	 public void insertionMethod(int n) 
-	    { 
-	        for(int i = 1; i<n; i++) {
-	        	for(int j=i; j>0; j--) {
-	        		numOfKeyComparisons++;
-	        		if(array[j] < array[j-1]) {
-	        			//Swap function
+	public void insertionMethod(int n) {
+		long startTime = System.nanoTime();
+		for(int i = 1; i<n; i++) {
+			for(int j=i; j>0; j--) {
+				numOfKeyComparisons++;
+				if(array[j] < array[j-1]) {
+					//Swap function
 	        			int temp = array[j];
 	        			array[j] = array[j-1];
 	        			array[j-1] = temp;
-	        		}
-	        		else break;
-	        			
-	        	}
+				}
+	        	else break;		
 	        }
-	    } 
+		}
+		cpuTime += System.nanoTime() - startTime;
+	} 
 }
