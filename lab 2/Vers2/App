@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class App {
 
 	public static void main(String[] args) {
@@ -13,23 +15,25 @@ public class App {
 			length ++;
 		}
 		
-		// for each size, get values for 3 different arrays
+		Scanner sc = new Scanner(System.in);
+		// set whether merge or insertion
+		System.out.println("Type 'true' for mergesort, 'false' for insertionsort");
+		boolean isMerge = sc.nextBoolean();
+		// set data type
+		System.out.println("Select data type: \n1. Randomise\n2. Increment\n3. Decrement");
+		int option = sc.nextInt();
+		
+		System.out.println("IsMerge: " + isMerge + ", option: " + option);
+
+		// for each size, get values for chosen sorting type and data type
 		for (int j = 0; j < length; j ++) {
 			Sorting.SIZE = arraySize[j];
-			// for each data option
-			for (int option = 1; option < 2; option ++) {
-				
-				// Merge Sort
-				/*array.resultRun(option,true);
-				System.out.println("MergeSort: ");
-				System.out.println("SIZE = " + Sorting.SIZE + ", option = " + option);
-				array.printKeyComparisons();
-				*/// Insertion Sort
-				array.resultRun(option, false);
-				System.out.println("InsertionSort: ");
-				System.out.println("SIZE = " + Sorting.SIZE + ", option = " + option);
-				array.printKeyComparisons();	
-			}
+			
+			array.resultRun(option, isMerge);
+			System.out.println("SIZE = " + Sorting.SIZE);
+			array.printKeyComparisons();
+			array.printCPUTime();
+
 		}
 	}
 
