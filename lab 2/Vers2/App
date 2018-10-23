@@ -2,9 +2,12 @@ import java.util.Scanner;
 
 public class App {
 
-	public static void main(String[] args) {
-		// initialise sorting array
-		Sorting array = new Sorting();
+		public static void main(String[] args) {
+		// CPU Time
+		long totalCPU = 0;
+		long numOfSort = 0;
+		
+		Scanner sc = new Scanner(System.in);
 		
 		// get size range from 1000-1mil
 		int increment = 50000;
@@ -15,26 +18,39 @@ public class App {
 			length ++;
 		}
 		
-		Scanner sc = new Scanner(System.in);
-		// set whether merge or insertion
-		System.out.println("Type 'true' for mergesort, 'false' for insertionsort");
-		boolean isMerge = sc.nextBoolean();
-		// set data type
+		// Set whether merge or insertion
+		System.out.println("type '1' for mergesort, '0' for insertion sort");
+		int isMerge = sc.nextInt();
+		
+		// Set data type
 		System.out.println("Select data type: \n1. Randomise\n2. Increment\n3. Decrement");
 		int option = sc.nextInt();
 		
+		// Run program
 		System.out.println("IsMerge: " + isMerge + ", option: " + option);
-
-		// for each size, get values for chosen sorting type and data type
 		for (int j = 0; j < length; j ++) {
 			Sorting.SIZE = arraySize[j];
-			
-			array.resultRun(option, isMerge);
+			Sorting array = new Sorting();
+			for (int count = 0; count < 50; count ++) {
+				array.resetCPUTime();
+				array.resetKey();
+				array.generateData(option);
+				
+				if (isMerge == 1) 
+					array.mergeSort(0, (Sorting.SIZE-1));
+				
+				else 
+					array.insertionSort(Sorting.SIZE);	
+				totalCPU += array.getCPUTime();
+				numOfSort ++;
+			}
+		
+			// Results
 			System.out.println("SIZE = " + Sorting.SIZE);
 			array.printKeyComparisons();
-			array.printCPUTime();
-
+			System.out.println("CPU Time: " + (totalCPU/numOfSort/1000));
 		}
+		
 	}
 
 }
