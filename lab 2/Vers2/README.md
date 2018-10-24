@@ -1,7 +1,7 @@
 WHAT IS THIS?
 
-This is a demo application to perform empirical comparison of time efficiency between two algorithm of Insertion Sort and Merge Sort.
------------------------------------------------------------------------------------------------------
+This is a demo application to perform empirical comparison of time efficiency between two algorithm of Insertion Sort and Merge Sort
+
 HOW TO USE THE APPLICATION:
 
 (((OneCaseApp)))
