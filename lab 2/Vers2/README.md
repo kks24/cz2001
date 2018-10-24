@@ -1,3 +1,6 @@
+# CZ2001 - Lab Projects
+Project 3A: Empirical comparison between Insertion Sort and Mergesort 
+
 WHAT IS THIS?
 
 This is a demo application to perform empirical comparison of time efficiency between two algorithm of Insertion Sort and Merge Sort
