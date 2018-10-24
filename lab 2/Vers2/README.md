@@ -23,6 +23,7 @@ UNDER EACH SORTING ALGORITHM, FOLLOWING ARE THE DATA TYPE FOR USER TO CHOOSE
 3. Decrement - Generating Integers of (n, n-1, .., 1) sorted in descending order
 
 (((App)))
+
 THERE ARE 2 SORTING ALGORITHMS IN THE MAIN MENU FOR USERS TO INTERACT, INSERTION SORT AND MERGE SORT
 
 0. Insertion Sort - An intuitive and primitive sorting method using incremental approach, given an unordered set of objects
