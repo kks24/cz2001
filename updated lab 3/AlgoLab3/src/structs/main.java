@@ -7,19 +7,62 @@ public class main {
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
-		 Graph g = new Graph(8); 
-		 	Scanner sc = new Scanner(System.in);
+		Scanner sc= new Scanner(System.in);
+		int sEdge;
+		int dEdge;
+		System.out.println("Welcome"); 
+		//System.out.println("Please enter the number of nodes"); 
+		//int numberOfNodes = sc.nextInt();
+		Graph g = new Graph(8); 
+		System.out.println("------------MENU---------------");
+		int choice;
+		do 
+		{
+			System.out.println("1)Enter the edges");
+			System.out.println("0)Exit");
+			choice = sc.nextInt();
+			if(choice==1) 
+			{
+				System.out.println("Enter the node index for source edge");
+				sEdge=sc.nextInt();
+				System.out.println("Enter the node index for destination edge");
+				dEdge=sc.nextInt();
+				g.addEdge(sEdge, dEdge);
+				g.addEdge(dEdge, sEdge);
+			}
+			else 
+			{
+				if(choice!=0) 
+				{
+					System.out.println("Wrong chocie try again");
+				}
+				else
+				{
+					System.out.println("Menu exiting");
+				}
+			}
+		}while(choice!=0);
+		sc.nextLine();
+		System.out.println("Enter your source city");
+        String source = sc.nextLine();
+        //sc.nextLine();
+        System.out.println("Enter your destination");
+        String destination = sc.nextLine();
+        g.BFS(source,destination);
+        
+        
+        
 	        //Beijing -> HK
-		 	g.addEdge(0, 1);
-	        g.addEdge(1, 0);
+		 	//g.addEdge(0, 1);
+	        //g.addEdge(1, 0);
 	        
 	        //Beijing -> Singapore
-		 	g.addEdge(0, 2);
-	        g.addEdge(2, 0);
+		 	//g.addEdge(0, 2);
+	        //g.addEdge(2, 0);
 	        
 	        //Beijing -> Singapore
-	        g.addEdge(0, 2);
-	        g.addEdge(2, 0);
+	        //g.addEdge(0, 2);
+	        /*g.addEdge(2, 0);
 	        
 	        //Beijing -> Shanghai
 		 	g.addEdge(0, 4);
@@ -70,12 +113,8 @@ public class main {
 	        g.addEdge(6, 7);
 	        
 	        System.out.println("Following is Breadth First Traversal "+ 
-	                           "(starting from vertex 2)"); 
-	        System.out.println("Enter your source city");
-	        String source = sc.nextLine();
-	        System.out.println("Enter your destination");
-	        String destination = sc.nextLine();
-	        g.BFS(source,destination); 
+	                           "(starting from vertex 2)"); */
+	         
 	}
 
 }
