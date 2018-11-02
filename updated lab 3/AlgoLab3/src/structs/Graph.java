@@ -55,6 +55,8 @@ public class Graph {
 	  
 	        int dequeuedIndex;
 	        
+	        long startTime = System.nanoTime();
+	        
 	        while (queue.size() != 0) 
 	        { 
 	            // Dequeue a vertex from queue and print it 
@@ -98,10 +100,14 @@ public class Graph {
 	            }
 	        }
 	        
+	        long endTime = System.nanoTime();
+	        
 	        System.out.println("destination id: " + destination);
 	        System.out.println("Maximum size of array: " + adj.length);
 	       
-	        System.out.print("The source city to the destination city 's route = "+adj[destination].nodeLength);
+	        System.out.println("The source city to the destination city 's route = "+adj[destination].nodeLength);
+	        System.out.println("CPU Time: " + (endTime - startTime)/1000000 + "milliseconds");
+	        
 	    }
 	    
 	    void init ()
