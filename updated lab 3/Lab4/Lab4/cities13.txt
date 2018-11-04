@@ -1,2 +1,0 @@
-Beijing|Hong Kong|Singapore|Sydney|Shanghai|Seoul|Tokyo|Los Angeles|Vienna|Cairo|Santiago|New Delhi|Jakarta|
-Beijing,Hong Kong|Beijing,Singapore|Beijing,Shanghai|Beijing,Tokyo|Hong Kong,Shanghai|Hong Kong,Singapore|Singapore,Shanghai|Singapore,Sydney|Shanghai,Tokyo|Shanghai,Seoul|Seoul,Tokyo|Seoul,Singapore|Tokyo,Los Angeles|Los Angeles,Tokyo|Vienna,Los Angeles|Vienna,Seoul|Vienna,Beijing|Cairo,Singapore|Cairo,Jakarta|Cairo,Seoul|Santiago,Singapore|Santiago,Jakarta|Santiago,Hong Kong|New Delhi,Shanghai|New Delhi,Beijing|New Delhi,Tokyo|Jakarta,Singapore 

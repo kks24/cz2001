@@ -50,6 +50,13 @@ public class Graph2 {
 	}
 	
 	public void BFS(String sourceName, String destinationName) {
+		// Reset all data in node
+		for (int count = 0; count < numOfVertices; count ++) {
+			adj[count].nodeLength = 0;
+			adj[count].previousIndex = -1;
+		}
+		
+		
 		// Get nodeIndex of sourcename
 		int source = findNodeIndex(sourceName);
 		if (source == -1) {
@@ -63,11 +70,6 @@ public class Graph2 {
 		}
 		
 		boolean visited[] = new boolean[numOfVertices];
-		
-		// Reset all nodeLength to 0
-		for (int count = 0; count < numOfVertices; count ++) {
-			adj[count].nodeLength = 0;
-		}
 		
 		// Create a queue for BFS
 		LinkedList<Integer> queue = new LinkedList<Integer>(); 
