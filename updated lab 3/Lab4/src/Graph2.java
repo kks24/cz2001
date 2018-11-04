@@ -7,13 +7,15 @@ import java.util.Scanner;
 
 public class Graph2 {
 	// Total number of nodes/vertices
-	private int numOfVertices;
+	public int numOfVertices;
 	// Adjacency Lists
-	private Node[] adj;
+	public Node[] adj;
 	// List of cities
 	String[] clist;
 	// List of edges
 	String[] elist;
+	
+	public Graph2() {};
 	
 	public Graph2(int numOfVertices) {
 		// Initialise the adjacency list and its size
@@ -31,7 +33,7 @@ public class Graph2 {
 			adj[i] = new Node(clist[i], i);
 		}
 		
-		// Initialise Edges 
+		// Initialise Edges
 		for (int j = 0; j < elist.length; j ++) {
 			String[] temp = elist[j].split(",");
 			int v1 = findNodeIndex(temp[0]);
@@ -74,14 +76,14 @@ public class Graph2 {
         visited[source]=true; 
         queue.add(source); 
         
-        int dequeuedIndex = -1;
+        int dequeuedIndex;
         
         // Start CPU Time
         long startTime = System.nanoTime();
         
         while (queue.size() != 0) {
         	// Dequeue a vertex from queue
-        	int dequeueIndex = queue.poll();
+        	dequeuedIndex = queue.poll();
         	
         	// Get all adjacent vertices of the dequeued vertex
         	LinkedList<Integer> targetList = adj[dequeuedIndex].edges;
@@ -96,8 +98,9 @@ public class Graph2 {
         			visited[targetList.get(j)] = true;
         			
         			// update node's path distance
-        			Node previousNode = adj[dequeueIndex];
+        			Node previousNode = adj[dequeuedIndex];
         			targetNode.nodeLength= previousNode.nodeLength+1; 
+        			targetNode.previousIndex = previousNode.getNodeIndex();
         		}
         		// Visited node
         		else {
@@ -109,12 +112,25 @@ public class Graph2 {
         	}
         }
 		long endTime = System.nanoTime();
-		 System.out.println("destination id: " + destination);
-	     System.out.println("Maximum size of array: " + adj.length);
-	       
-	     System.out.println("The source city to the destination city 's route = "+adj[destination].nodeLength);
-	     System.out.println("CPU Time: " + (endTime - startTime)/1000000 + "milliseconds");
-	       
+	     
+		
+	    System.out.println("Number of stops (inclusive of destination) = "+adj[destination].nodeLength);
+	    System.out.print("Route: ");
+	    LinkedList<String> route = new LinkedList<String>();
+	    
+	    int tempIndex = destination;
+	    while (tempIndex != -1) {
+	    	route.addFirst(adj[tempIndex].getCity());
+	    	tempIndex = adj[tempIndex].previousIndex;
+	    }
+	    for (int x = 0; x < route.size(); x ++) {
+	    	System.out.print(route.get(x));
+	    	if (x + 1 < route.size())
+	    		System.out.print(" => ");
+	    }
+	    System.out.println();
+
+	    System.out.println("CPU Time: " + (endTime - startTime) + " nanoseconds");
 	}
 	
 	public int findNodeIndex(String cname) {

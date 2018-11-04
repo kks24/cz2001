@@ -5,7 +5,7 @@ public class App {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		boolean graphFlag = false;
-		Graph2 graph = new Graph2(8);
+		Graph2 graph = new Graph2();
 		int option = 0;
 		
 		do {
@@ -22,23 +22,31 @@ public class App {
 						graphFlag = true;
 						break;
 					}
-					else {
+					else {						
 						System.out.println("Please input the correct number of cities");
 						continue;
 					}
 				case 2:
 					if (graphFlag == false)
 						break;
+					// Show available cities
+					System.out.println("List of Cities available:");
+					for (int x = 0; x < graph.numOfVertices; x ++) {
+						System.out.println(graph.adj[x].getCity());
+					}
 					System.out.println("Input source city name:");
-					String sourceName = sc.next();
+					sc.nextLine();
+					String sourceName = sc.nextLine();
 					System.out.println("Input destination city name:");
-					String destinationName = sc.next();
+					String destinationName = sc.nextLine();
 					graph.BFS(sourceName, destinationName);
-					continue;
+					break;
 				case 3: 
 					System.out.println("Shutting down");
+					break;
 				default:
 					System.out.println("Invalid option");
+					break;
 			}
 		} while (option != 3);
 		

@@ -12,6 +12,9 @@ public class Node {
 	// Represent the shortest distance from sourcename, used for BFS
 	public int nodeLength = 0;
 	
+	// For back tracking and obtaining the shortest route
+	public int previousIndex = -1;
+	
 	// Constructor
 	public Node(String cname, int nodeIndex) {
 		this.cname = cname;
@@ -26,7 +29,7 @@ public class Node {
 	public int getNodeIndex() {
 		return nodeIndex;
 	}
-	public String getCountry() {
+	public String getCity() {
 		return cname;
 	}
 
