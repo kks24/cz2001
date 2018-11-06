@@ -1,0 +1,2 @@
+Beijing|Hong Kong|Singapore|Sydney|Shanghai|Seoul|Tokyo|Los Angeles|
+Beijing,Hong Kong|Beijing,Singapore|Beijing,Shanghai|Beijing,Tokyo|Hong Kong,Shanghai|Hong Kong,Singapore|Singapore,Shanghai|Singapore,Sydney|Singapore,Tokyo|Shanghai,Tokyo|Shanghai,Seoul|Seoul,Tokyo|Seoul,Singapore|Tokyo,Los Angeles|Los Angeles,Tokyo
